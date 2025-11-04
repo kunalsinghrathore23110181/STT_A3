@@ -1,10 +1,261 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+//Question : 
+//Understanding Basic Syntax and Control Structures
+using System;
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+class Calculator
+{
+    static void Main()
+    {
+        Console.Write("Enter first number: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
 
-</Project>
+        Console.Write("Enter second number: ");
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        int sum = num1 + num2;
+        int diff = num1 - num2;
+        int prod = num1 * num2;
+        double div = (double)num1 / num2;
+
+        Console.WriteLine($"\nSum = {sum}");
+        Console.WriteLine($"Difference = {diff}");
+        Console.WriteLine($"Product = {prod}");
+        Console.WriteLine($"Division = {div}");
+
+        if (sum % 2 == 0)
+            Console.WriteLine("The sum is even.");
+        else
+            Console.WriteLine("The sum is odd.");
+    }
+}
+
+
+
+
+/*
+ //Question :
+//For Loop: Print Numbers from 1 to 10
+using System;
+
+class ForLoopExample
+{
+    static void Main()
+    {
+        Console.WriteLine("Numbers from 1 to 10 using for loop:");
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.Write(i + " ");
+        }
+    }
+}
+
+
+//Question :
+//Uses a foreach loop to print numbers from 1 to 10.
+using System;
+
+class ForEachLoopExample
+{
+    static void Main()
+    {
+        int[] numbers = {1,2,3,4,5,6,7,8,9,10};
+
+        Console.WriteLine("Numbers from 1 to 10 using foreach loop:");
+        foreach (int num in numbers)
+        {
+            Console.Write(num + " ");
+        }
+    }
+}
+
+//Question :
+//Uses a do-while loop to keep asking the user for input until they enter exit.
+
+using System;
+
+class DoWhileExample
+{
+    static void Main()
+    {
+        string input;
+        do
+        {
+            Console.Write("Enter something (type 'exit' to stop): ");
+            input = Console.ReadLine();
+        } while (input.ToLower() != "exit");
+
+        Console.WriteLine("Program ended.");
+    }
+}
+
+//Question :
+
+//Defines and calls a function2 that calculates the factorial of a number provided by the user.
+
+using System;
+
+class FactorialExample
+{
+    static void Main()
+    {
+        Console.Write("Enter a number to find its factorial: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        int result = Factorial(n);
+        Console.WriteLine($"Factorial of {n} is: {result}");
+    }
+
+    // Static function definition
+    static int Factorial(int num)
+    {
+        int fact = 1;
+        for (int i = 1; i <= num; i++)
+        {
+            fact *= i;
+        }
+        return fact;
+    }
+}
+
+//Question :
+//////Using Single and Multi-dimensional Arrays
+
+//Implements the bubble sort algorithm on array3 of integers. You should not use any library functions to achieve this task. The entire logic must be present in your C# code.
+
+using System;
+
+class BubbleSortExample
+{
+    static void Main()
+    {
+        int[] arr = { 5, 3, 8, 1, 2 };
+        int n = arr.Length;
+
+        Console.WriteLine("Original Array:");
+        foreach (int num in arr)
+            Console.Write(num + " ");
+
+        // Bubble Sort Logic
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    // Swap elements
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        Console.WriteLine("\nSorted Array:");
+        foreach (int num in arr)
+            Console.Write(num + " ");
+    }
+}
+
+
+//Question :
+
+//Stores a 2-D array into one 1-D array in: (i) row major order, (ii)column major order.
+
+
+using System;
+
+class TwoDToOneD
+{
+    static void Main()
+    {
+        int[,] matrix = { { 1, 2, 3 }, { 4, 5, 6 } };
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+        int[] rowMajor = new int[rows * cols];
+        int[] colMajor = new int[rows * cols];
+        int k = 0;
+
+        // Row-major order
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                rowMajor[k++] = matrix[i, j];
+            }
+        }
+
+        // Column-major order
+        k = 0;
+        for (int j = 0; j < cols; j++)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                colMajor[k++] = matrix[i, j];
+            }
+        }
+
+        Console.WriteLine("Original 2D Array:");
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+                Console.Write(matrix[i, j] + " ");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\nRow-Major Order (1D): " + string.Join(" ", rowMajor));
+        Console.WriteLine("Column-Major Order (1D): " + string.Join(" ", colMajor));
+    }
+}
+
+
+//Question :
+
+//Performs matrix multiplication of two matrices A and B and stores the resultant in matrix C and print it.
+
+
+using System;
+
+class MatrixMultiplication
+{
+    static void Main()
+    {
+        int[,] A = { { 1, 2, 3 }, { 4, 5, 6 } };
+        int[,] B = { { 7, 8 }, { 9, 10 }, { 11, 12 } };
+
+        int rowsA = A.GetLength(0);
+        int colsA = A.GetLength(1);
+        int rowsB = B.GetLength(0);
+        int colsB = B.GetLength(1);
+
+        // Check if multiplication is possible
+        if (colsA != rowsB)
+        {
+            Console.WriteLine("Matrix multiplication not possible!");
+            return;
+        }
+
+        int[,] C = new int[rowsA, colsB];
+
+        // Matrix Multiplication Logic
+        for (int i = 0; i < rowsA; i++)
+        {
+            for (int j = 0; j < colsB; j++)
+            {
+                for (int k = 0; k < colsA; k++)
+                {
+                    C[i, j] += A[i, k] * B[k, j];
+                }
+            }
+        }
+
+        Console.WriteLine("Resultant Matrix C (A × B):");
+        for (int i = 0; i < rowsA; i++)
+        {
+            for (int j = 0; j < colsB; j++)
+                Console.Write(C[i, j] + " ");
+            Console.WriteLine();
+        }
+    }
+}
+
+*/
